@@ -6,8 +6,13 @@ import morgan from 'morgan';
 import { config } from './src/settings/config.js';
 import { startConnection } from './src/settings/database.js';
 
+//imports de rutas
+import { authRouter } from './src/routes/auth.routes.js';
+import { authHeader } from './src/models/validations/auth-validation.js';
+
 const app = express();
 
+//middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
@@ -17,7 +22,7 @@ app.use(cors({
 app.use(helmet());
 app.use(morgan('dev'));
 
-
+app.use('/api/auth', authRouter);
 
 app.listen(config.port, async () => {
   await startConnection({ uri: config.mongo, database: config.database });
