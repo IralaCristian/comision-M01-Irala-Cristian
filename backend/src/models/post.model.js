@@ -42,5 +42,7 @@ const PostSchema= new Schema(
     }
 )
 
+
+
 //exportamos el modelo
 export const PostModel= model('Post', PostSchema);
