@@ -1,7 +1,7 @@
 import { PostModel } from "../models/post.model.js";
 import { CommentModel } from "../models/comment.model.js";
 
-/*
+/*------------------------------------------------------------
  Post controllers:
  -createPost
  -listAllPosts
@@ -9,7 +9,7 @@ import { CommentModel } from "../models/comment.model.js";
  -getPost
  -updatePost
  -deletePost
-*/
+--------------------------------------------------------------*/
 
 //Create a Post
 
@@ -74,6 +74,7 @@ export const ctrlListUserPosts = async (req, res) => {
 
 }
 
+// Obtengo un post mediante su id
 export const ctrlGetPost = async (req, res) => {
     const { postId } = req.params;
 
@@ -94,6 +95,7 @@ export const ctrlGetPost = async (req, res) => {
 
 }
 
+// Actualiza un post
 export const ctrlUpdatePost = async (req, res) => {
     const { postId } = req.params;
   
@@ -114,6 +116,7 @@ export const ctrlUpdatePost = async (req, res) => {
     }
 }
 
+//elimina un post y sus comentarios
 export const ctrlDeletePost = async (req, res) => {
     const { postId } = req.params;
 
