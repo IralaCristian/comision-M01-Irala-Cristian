@@ -19,19 +19,23 @@ import {
   updatePostValidations
 } from '../models/validations/post-validations.js';
 
+//middlewares
+import { authHeader } from '../models/validations/auth-validation.js';
+import { validateToken } from '../middlewares/validate-token.js';
+
+
 const postRouter = Router();
-//const postRouterPublic = Router();
 
-postRouter.post('/', createPostValidations, ctrlCreatePost);
 
-//Obtiene todos los post, no necesita verificacion de usuario logueado (Público)
-//postRouterPublic.get('/', ctrlListAllPosts);
+//Obtiene todos los post, no necesita verificación de usuario logueado (Público)
+postRouter.get('/', ctrlListAllPosts);
+
 //Obtiene todos los post del usuario logueado
-postRouter.get('/', listUserPostsValidations, ctrlListUserPosts);
+//postRouter.get('/', listUserPostsValidations, ctrlListUserPosts);
 
+postRouter.post('/',authHeader, validateToken, createPostValidations, ctrlCreatePost);
 postRouter.get('/:postId', getPostValidations, ctrlGetPost);
-postRouter.patch('/:postId', updatePostValidations, ctrlUpdatePost);
-postRouter.delete('/:postId', deletePostValidations, ctrlDeletePost);
+postRouter.patch('/:postId', authHeader, validateToken, updatePostValidations, ctrlUpdatePost);
+postRouter.delete('/:postId', authHeader, validateToken, deletePostValidations, ctrlDeletePost);
 
 export { postRouter };
-//export { postRouterPublic };

@@ -28,9 +28,9 @@ app.use(morgan('dev'));
 
 //rutas de usuario
 app.use('/api/auth', authRouter);
+
 //rutas de posteos
-//app.use('api/post/public', postRouterPublic) // Públicas
-app.use('/api/post', authHeader, validateToken, postRouter)
+app.use('/api/post', postRouter)
 
 app.listen(config.port, async () => {
   await startConnection({ uri: config.mongo, database: config.database });
