@@ -2,7 +2,7 @@ import { Router } from "express";
 
 //controllers
 import {
-    ctrlCreateComment, ctrlGetComment, ctrlUpdateComment
+    ctrlCreateComment, ctrlDeleteComment, ctrlGetComment, ctrlUpdateComment
 } from "../controllers/comment.controller.js";
 
 //validations
@@ -27,6 +27,8 @@ commentRouter.post('/:postId', authHeader, validateToken, createCommentValidatio
 commentRouter.get('/:commentId', authHeader, validateToken, getCommentValidations, ctrlGetComment);
 //Update comment route
 commentRouter.patch('/:commentId', authHeader, validateToken, updateCommentValidations, ctrlUpdateComment);
+//Delete comment route
+commentRouter.delete('/:commentId', authHeader, validateToken, deleteCommentValidations, ctrlDeleteComment);
 
 
 

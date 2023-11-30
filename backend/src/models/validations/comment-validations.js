@@ -22,10 +22,10 @@ export const createCommentValidations = [
 //];
 
 export const deleteCommentValidations = [
-    param('postId')
-        .notEmpty().withMessage('El parametro { postId } no debe estar vacio.')
-        .isString().withMessage('El parametro { postId } debe ser un string.')
-        .custom(isValidObjectId).withMessage('El parametro { postId } debe ser una id valida.'),
+//    param('postId')
+//        .notEmpty().withMessage('El parametro { postId } no debe estar vacio.')
+//        .isString().withMessage('El parametro { postId } debe ser un string.')
+//        .custom(isValidObjectId).withMessage('El parametro { postId } debe ser una id valida.'),
     param('commentId')
         .notEmpty().withMessage('El parametro { commentId } no debe estar vacio.')
         .isString().withMessage('El parametro { commentId } debe ser un string.')

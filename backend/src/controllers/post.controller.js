@@ -98,12 +98,17 @@ export const ctrlGetPost = async (req, res) => {
 // Actualiza un post
 export const ctrlUpdatePost = async (req, res) => {
     const { postId } = req.params;
+    const userId= req.user._id;
   
     try {
       const post = await PostModel.findOne({ _id: postId});
   
       if (!post) {
         return res.status(404).json({ error: 'Post not found' });
+      }
+
+      if(!(post.author.equals(userId))){
+        return res.status(403).json({ error: 'Loged user is not the Post author' })
       }
   
       post.set(req.body);
@@ -119,12 +124,18 @@ export const ctrlUpdatePost = async (req, res) => {
 //elimina un post y sus comentarios
 export const ctrlDeletePost = async (req, res) => {
     const { postId } = req.params;
+    const userId = req.user._id;
 
     try {
       const post = await PostModel.findOne({_id: postId});
   
       if (!post) {
         return res.status(404).json({ error: 'Post not found' });
+      }
+
+      //no modularize esta funcion por cuestion de tiempo, se que puede modularizarse
+      if(!(post.author.equals(userId))){
+        return res.status(403).json({ error: 'Loged user is not the Post author' })
       }
   
       await CommentModel.deleteMany({ _id: { $in: post.comments } });
