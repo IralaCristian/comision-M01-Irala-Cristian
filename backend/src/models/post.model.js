@@ -1,5 +1,6 @@
 import { Schema, Types, model } from "mongoose";
 
+
 //configuramos el Schema para Post
 const PostSchema= new Schema(
     {
@@ -16,10 +17,10 @@ const PostSchema= new Schema(
             required: true,
             trim: true,
         },
-        auhtor: {
+        author: {
             type: Types.ObjectId,
             ref: 'User',
-            require: true,
+            required: true,
         },
         comments: [
             {
@@ -30,10 +31,6 @@ const PostSchema= new Schema(
         imageURL: {
             type: String,
             required: true,
-        },
-        createdAt: {
-            type: Date,
-            default: new Date( Date.now())
         },
     },
     {

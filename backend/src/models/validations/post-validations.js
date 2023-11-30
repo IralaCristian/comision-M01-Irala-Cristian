@@ -6,7 +6,7 @@ export const createPostValidations = [
     body('title')
         .notEmpty().withMessage('El campo { title } no debe estar vacio.')
         .isString().withMessage('El campo { title } debe ser un string.')
-        .isLength({ min: 3, max: 100 }).withMessage('El campo { title } debe tener un minimo de 3 carácteres y un maximo de 100'),
+        .isLength({ min: 3, max: 100 }).withMessage('El campo { title } debe tener un mínimo de 3 carácteres y un máximo de 100'),
     body('description')
         .notEmpty().withMessage('El campo { description } no debe estar vacio.')
         .isString().withMessage('El campo { descripcion } debe ser un String'),
@@ -16,7 +16,7 @@ export const createPostValidations = [
     applyValidations,
 ];
 
-export const listPostsValidations = [
+export const listUserPostsValidations = [
     header('authorization').exists(),
     applyValidations,
 ];
@@ -38,6 +38,14 @@ export const updatePostValidations = [
         .optional()
         .notEmpty().withMessage('El campo { title } no debe estar vacio.')
         .isString().withMessage('El campo { title } debe ser un string.'),
+    body('description')
+        .optional()
+        .notEmpty().withMessage('El campo { description } no debe estar vacio.')
+        .isString().withMessage('El campo { descripcion } debe ser un String'),
+    body('imageURL')
+        .optional()
+        .notEmpty().withMessage('El campo { imageURL} no debe estar vacio')
+        .isURL().withMessage('El campo { imageURL } debe ser una URL'),
     applyValidations,
 ];
 

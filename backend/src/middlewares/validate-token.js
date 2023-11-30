@@ -6,6 +6,7 @@ import { UserModel } from '../models/user.model.js';
 export const validateToken = async (req, res, next) => {
   try {
     const token = req.headers.authorization;
+    console.log("entro a validate token")
 
 
     const { userId } = await verifyJWT({ token });
