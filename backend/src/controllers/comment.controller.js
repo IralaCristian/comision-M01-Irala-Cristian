@@ -114,3 +114,27 @@ export const ctrlDeleteComment = async (req, res) => {
         res.status(500).json({ error: "Couldn't delete music" });
     }
 };
+
+//Get a post comments list by postId 
+export const ctrlGetPostCommentsList = async (req, res) => {
+    const { PostId } = req.params;
+
+    try {
+
+        const post = await PostModel.findOne({ _id: postId });
+            
+        if (!post) {
+            return res.status(404).json({ error: 'Post not found.' });
+        }
+
+        if( post.comments.length < 1){
+            return res.status(404).json({ error: 'El post no tiene comentarios'})
+        }
+
+        res.status(200).json(post.comments);
+
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ error: error.message });
+    }
+};
