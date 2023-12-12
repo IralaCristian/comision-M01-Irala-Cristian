@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
   const emailRef = useId();
   const avatarURLRef = useId();
 
-  
+
   const handleSubmit =  async (e) => {
     e.preventDefault();
 
@@ -46,6 +46,8 @@ import { useNavigate } from "react-router-dom";
     });
 
     if (req.status !== 201) return alert("User register Error");
+
+    //Reset the form fields with a ref value (null)
     ref.current.reset();
 
     navigate("/login");
