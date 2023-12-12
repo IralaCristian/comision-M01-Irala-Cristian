@@ -9,8 +9,7 @@ import { startConnection } from './src/settings/database.js';
 import { authRouter } from './src/routes/auth.routes.js';
 import { postRouter } from './src/routes/post.routes.js';
 import { commentRouter } from './src/routes/comment.routes.js';
-import { authHeader } from './src/models/validations/auth-validation.js';
-import { validateToken } from './src/middlewares/validate-token.js';
+
 
 
 
