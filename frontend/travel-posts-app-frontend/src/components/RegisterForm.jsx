@@ -1,8 +1,12 @@
 import { useId, useRef } from "react";
+import { API_URL } from "../utils/const.js";
+import { useNavigate } from "react-router-dom";
 
  export const RegisterForm= () => {
 
+  //React Hooks
   const ref = useRef(null);
+  const navigate = useNavigate();
 
   const usernameRef = useId();
   const passwordRef = useId();
@@ -10,10 +14,42 @@ import { useId, useRef } from "react";
   const emailRef = useId();
   const avatarURLRef = useId();
 
-  const handleSubmit = (e) => {
+  
+  const handleSubmit =  async (e) => {
     e.preventDefault();
 
-    console.log(e.target.elements);
+    //Obtain user´s fields from formData
+    const formData = new FormData( e.target);
+
+    const username= formData.get("username");
+    const password= formData.get("password");
+    const repeatPassword= formData.get("repeatPassword");
+    const email= formData.get("email");
+    const avatarURL= formData.get("avatarURL");
+
+    //If password and repeatPassword does´n match return an Alert
+    if ( password !== repeatPassword) return alert("Password repetition does not match");
+    
+    const user= {
+      username,
+      password,
+      email,
+      avatarURL,
+    };
+
+    const req = await fetch(`${API_URL}/auth/register`, {
+      method: "POST",
+      body: JSON.stringify(user),
+      headers: {
+        "Content-Type": "application/json"
+      },
+    });
+
+    if (req.status !== 201) return alert("User register Error");
+    ref.current.reset();
+
+    navigate("/login");
+  
   }
 
   return (

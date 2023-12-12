@@ -1,9 +1,22 @@
-import React from 'react'
+import { useId } from 'react'
 
-const LoginForm = () => {
+export const LoginForm = () => {
+  const emailRef = useId();
+  const passwordRef = useId();
+
+
   return (
-    <div>LoginForm</div>
+    <div>
+      <h2> Login </h2>
+      <form>
+        <label htmlFor={emailRef}> Email:</label>
+        <input type="email" name="email" id={emailRef} placeholder='myEmail@email.com' required/>
+        <label htmlFor={passwordRef}> Password: </label>
+        <input type="password" name="" id={passwordRef} placeholder='**********' required/>
+        <br />
+        <button> Login </button>
+      </form>
+    </div>
   )
 }
 
-export default LoginForm
