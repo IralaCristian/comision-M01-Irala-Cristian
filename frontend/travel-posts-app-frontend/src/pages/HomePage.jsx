@@ -1,7 +1,15 @@
-import React from 'react'
+import React from "react";
+import Navbar from "../components/Navbar";
+import PostList from "../components/PostList";
 
 export const HomePage = () => {
   return (
-    <div>HomePage</div>
-  )
-}
+    <div className="container">
+      <Navbar />
+      <h1> Travel Posts</h1>
+      <div className="container-fluyd">
+        <PostList />
+      </div>
+    </div>
+  );
+};

@@ -1,12 +1,23 @@
 import { useId, useRef } from "react";
 import { API_URL } from "../utils/const.js";
 import { useNavigate } from "react-router-dom";
+import { formStyle } from "../styles/formsClasses.js";
+import Navbar from "./Navbar.jsx";
 
- export const RegisterForm= () => {
-
+export const RegisterForm = () => {
   //React Hooks
   const ref = useRef(null);
   const navigate = useNavigate();
+
+  //styles classes object
+  const {
+    formBtnPrim,
+    formColumn,
+    formContainer,
+    formControl,
+    formLabel,
+    formRow,
+  } = formStyle;
 
   const usernameRef = useId();
   const passwordRef = useId();
@@ -14,23 +25,23 @@ import { useNavigate } from "react-router-dom";
   const emailRef = useId();
   const avatarURLRef = useId();
 
-
-  const handleSubmit =  async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     //Obtain user´s fields from formData
-    const formData = new FormData( e.target);
+    const formData = new FormData(e.target);
 
-    const username= formData.get("username");
-    const password= formData.get("password");
-    const repeatPassword= formData.get("repeatPassword");
-    const email= formData.get("email");
-    const avatarURL= formData.get("avatarURL");
+    const username = formData.get("username");
+    const password = formData.get("password");
+    const repeatPassword = formData.get("repeatPassword");
+    const email = formData.get("email");
+    const avatarURL = formData.get("avatarURL");
 
     //If password and repeatPassword does´n match return an Alert
-    if ( password !== repeatPassword) return alert("Password repetition does not match");
-    
-    const user= {
+    if (password !== repeatPassword)
+      return alert("Password repetition does not match");
+
+    const user = {
       username,
       password,
       email,
@@ -41,7 +52,7 @@ import { useNavigate } from "react-router-dom";
       method: "POST",
       body: JSON.stringify(user),
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
     });
 
@@ -51,52 +62,56 @@ import { useNavigate } from "react-router-dom";
     ref.current.reset();
 
     navigate("/login");
-  
-  }
+  };
 
   return (
-    <div>
+    <div className={formContainer}>
+      <Navbar/>
       <h2> Sign Up </h2>
       <form onSubmit={handleSubmit} ref={ref}>
-        <label htmlFor={usernameRef}>User's name:</label>
+        <label htmlFor={usernameRef} className={formLabel}>User's name:</label>
         <input
           type="text"
           name="username"
-          placeholder="Natalia Natalia"
+          placeholder="JoeDoe"
           id={usernameRef}
+          className={formControl}
         />
-        <label htmlFor={passwordRef}> Password: </label>
+        <label htmlFor={passwordRef} className={formLabel}> Password: </label>
         <input
           type="password"
           name="password"
           placeholder="*********"
           id={passwordRef}
+          className={formControl}
         />
-        <label htmlFor={repeatPasswordRef}> Repeat password:</label>
+        <label htmlFor={repeatPasswordRef} className={formLabel}> Repeat password:</label>
         <input
           type="password"
           name="repeatPassword"
           placeholder="*********"
           id={repeatPasswordRef}
+          className={formControl}
         />
-        <label htmlFor={emailRef}>e-mail:</label>
+        <label htmlFor={emailRef} className={formLabel}>e-mail:</label>
         <input
           type="email"
           name="email"
           placeholder="your-email@email.com"
           id={emailRef}
+          className={formControl}
         />
-        <label htmlFor={avatarURLRef}> Your avatar URL: </label>
+        <label htmlFor={avatarURLRef} className={formLabel}> Your avatar URL: </label>
         <input
           type="url"
           name="avatarURL"
           placeholder="http://anImageURL.jpg"
           id={avatarURLRef}
+          className={formControl}
         />
         <br />
-        <button>Register</button>
+        <button className={formBtnPrim}>Register</button>
       </form>
     </div>
   );
-}
-
+};

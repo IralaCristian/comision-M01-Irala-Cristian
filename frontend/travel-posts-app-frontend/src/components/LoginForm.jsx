@@ -3,13 +3,21 @@ import { useNavigate } from "react-router-dom";
 import { API_URL } from "../utils/const";
 import { AuthContext } from "../providers/AuthProvider";
 import { formStyle } from "../styles/formsClasses.js";
+import Navbar from "./Navbar.jsx";
 
 export const LoginForm = () => {
   //React Hooks
   const emailRef = useId();
   const passwordRef = useId();
   const ref = useRef(null);
-  const { formControl, formLabel, formColumn, formRow, formBtnPrim, formContainer} = formStyle
+  const {
+    formControl,
+    formLabel,
+    formColumn,
+    formRow,
+    formBtnPrim,
+    formContainer,
+  } = formStyle;
 
   const { login } = useContext(AuthContext);
 
@@ -51,6 +59,7 @@ export const LoginForm = () => {
 
   return (
     <div className={formContainer}>
+      <Navbar />
       <div className={formRow}>
         <div className={formColumn}>
           <h2 className="display-5"> Login </h2>
