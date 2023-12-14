@@ -1,27 +1,28 @@
-import { useId, useRef, useContext } from 'react'
-import { useNavigate } from 'react-router-dom';
-import { API_URL } from '../utils/const';
-import { AuthContext } from '../providers/AuthProvider';
+import { useId, useRef, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { API_URL } from "../utils/const";
+import { AuthContext } from "../providers/AuthProvider";
+import { formStyle } from "../styles/formsClasses.js";
 
 export const LoginForm = () => {
-
   //React Hooks
   const emailRef = useId();
   const passwordRef = useId();
-  const ref= useRef(null);
+  const ref = useRef(null);
+  const { formControl, formLabel, formColumn, formRow, formBtnPrim, formContainer} = formStyle
 
   const { login } = useContext(AuthContext);
 
-  const navigate= useNavigate();
+  const navigate = useNavigate();
 
   //Submit handler
-  const handleSubmit = async (e) =>{
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     //obtain the form fields from formData
-    const formData= new FormData(e.target);
+    const formData = new FormData(e.target);
 
-    const user= {
+    const user = {
       email: formData.get("email"),
       password: formData.get("password"),
     };
@@ -46,22 +47,46 @@ export const LoginForm = () => {
     ref.current.reset();
 
     navigate("/");
-
-  }
-
+  };
 
   return (
-    <div>
-      <h2> Login </h2>
-      <form onSubmit={handleSubmit} ref={ref}>
-        <label htmlFor={emailRef}> Email:</label>
-        <input type="email" name="email" id={emailRef} placeholder='myEmail@email.com' required/>
-        <label htmlFor={passwordRef}> Password: </label>
-        <input type="password" name="password" id={passwordRef} placeholder='**********' required/>
-        <br />
-        <button> Login </button>
-      </form>
-    </div>
-  )
-}
-
+    <div className={formContainer}>
+      <div className={formRow}>
+        <div className={formColumn}>
+          <h2 className="display-5"> Login </h2>
+        </div>
+      </div>
+      <div className={formRow}>
+        <div className={formColumn}>
+          <form onSubmit={handleSubmit} ref={ref}>
+            <label htmlFor={emailRef} className={formLabel}>
+              Email:
+            </label>
+            <input
+              type="email"
+              name="email"
+              id={emailRef}
+              className={formControl}
+              placeholder="myEmail@email.com"
+              required
+            />
+            <label htmlFor={passwordRef} className={formLabel}>
+              Password:
+            </label>
+            <input
+              type="password"
+              name="password"
+              id={passwordRef}
+              className={formControl}
+              placeholder="**********"
+              required
+            />
+            <br />
+            <button className={formBtnPrim}> Login </button>
+          </form>
+        </div>
+      </div>
+      {/* div row py-3 */}
+    </div> //div container
+  );
+};

@@ -4,6 +4,7 @@ import { LoginForm } from './components/LoginForm';
 import { RegisterForm } from './components/RegisterForm';
 import PrivateRoutes from './components/PrivateRoutes';
 import NewPostForm from './components/NewPostForm';
+import NotFoundPage from './pages/NotFoundPage';
 
 
 function AppRouter() {
@@ -18,12 +19,11 @@ function AppRouter() {
             {/*private routes */}
             <Route element={<PrivateRoutes/>}>
                 <Route path='post/new' element={<NewPostForm/>}/>
-
             </Route>
 
-        </Routes>
+            <Route path='*' element={<NotFoundPage/>}/>
 
-    
+        </Routes>
     )
 }
 
