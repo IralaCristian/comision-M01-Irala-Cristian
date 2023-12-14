@@ -1,29 +1,44 @@
-import { useContext, useState, createContext } from "react";
+import { useState, createContext, useEffect } from "react";
 
-export const AuthContext= useContext();
+export const AuthContext = createContext();
 
-function AuthProvider({children}) {
+function AuthProvider({ children }) {
+  const [auth, setAuth] = useState(undefined);
 
-    const [auth, setAuth] = useState({});
+  const login = ({ user, token }) => {
+    setAuth({ user, token });
 
-    const login= ({user, token})=> {
-        setAuth({user, token});
+    localStorage.setItem("token", token);
+    localStorage.setItem("user", JSON.stringify(user));
+  };
 
-        localStorage.setItem("token", token);
-        localStorage.setItem("user", JSON.stringify(user));
-    };
+  const logout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    setAuth(null);
+  };
 
-    const logout = () => {
-        localStorage.removeItem("user");
-        localStorage.removeItem("token");
-        setAuth(null);
-    };
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const token = localStorage.getItem("token");
 
-    return (
-        <AuthContext.Provider value= { {auth, login, logout}}>
-          {children}
-        </AuthContext.Provider>
-     )
+    // si no tenemos alguno de los dos campos en el localStorage borramos todo
+    if (!user || !token) {
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
+
+      setAuth(null);
+      return;
+    }
+
+    setAuth({ user, token });
+  }, []);
+
+  return (
+    <AuthContext.Provider value={{ auth, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
 }
 
-export default AuthProvider
+export default AuthProvider;
