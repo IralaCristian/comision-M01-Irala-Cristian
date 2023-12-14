@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 
 function Post({ postId, title, description, imageURL, author, comments, createdAt}) {

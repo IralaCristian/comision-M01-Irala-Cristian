@@ -6,17 +6,20 @@ import PrivateRoutes from "./components/PrivateRoutes";
 import NewPostForm from "./components/NewPostForm";
 import NotFoundPage from "./pages/NotFoundPage";
 import EditPostForm from "./components/EditPostForm";
+import PostPage from "./pages/PostPage";
 
 function AppRouter() {
   return (
     <Routes>
       {/*public routes */}
 
+      <Route path="/" element={<HomePage />} />
       <Route path="/register" element={<RegisterForm />} />
       <Route path="/login" element={<LoginForm />} />
+      <Route path="post/:postId" element={<PostPage />} />
 
       
-        <Route path="/" element={<HomePage />} />
+        {/*Private routes */}
         <Route element={<PrivateRoutes />}>
           <Route path="post/new" element={<NewPostForm />} />
           <Route path="post/edit/:postId" element={<EditPostForm />} />

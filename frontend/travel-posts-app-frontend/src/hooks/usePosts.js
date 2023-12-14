@@ -2,9 +2,6 @@ import { useEffect, useReducer } from "react";
 import { postReducer, postTypes } from "../reducers/posts-reducers.js";
 import { API_URL } from "../utils/const.js";
 
-
-
-
 export const usePost = () => {
   // creamos el estado y las funciones para modificarlo con useReducer
   const [allPosts, dispatch] = useReducer(postReducer, []);
@@ -25,13 +22,14 @@ export const usePost = () => {
       });
   }, []);
 
-
   // eliminamos un post
-  const deletePost = ( postId) => {
-    dispatch({ type: postTypes.delete_post,
-        payload: {
-            postId,
-        } });
+  const deletePost = (postId) => {
+    dispatch({
+      type: postTypes.delete_post,
+      payload: {
+        postId,
+      },
+    });
   };
 
   // añadimos una nueva tarea a la lista
@@ -58,6 +56,7 @@ export const usePost = () => {
       },
     });
   };
+
 
   return {
     allPosts,

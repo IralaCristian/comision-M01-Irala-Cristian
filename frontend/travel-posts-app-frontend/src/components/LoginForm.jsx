@@ -1,5 +1,5 @@
 import { useId, useRef, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { API_URL } from "../utils/const";
 import { AuthContext } from "../providers/AuthProvider";
 import { formStyle } from "../styles/formsClasses.js";
@@ -17,6 +17,7 @@ export const LoginForm = () => {
     formRow,
     formBtnPrim,
     formContainer,
+    formLink,
   } = formStyle;
 
   const { login } = useContext(AuthContext);
@@ -96,6 +97,11 @@ export const LoginForm = () => {
         </div>
       </div>
       {/* div row py-3 */}
+      <br />
+      <div className={formRow}>
+        <p className="display-7"> New user? </p>
+        <Link  className={formLink} to="/register"> Register now! </Link>
+      </div>
     </div> //div container
   );
 };
