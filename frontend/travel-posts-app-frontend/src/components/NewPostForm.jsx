@@ -34,12 +34,6 @@ function NewPostForm() {
     const description= formData.get("description");
     const imageURL= formData.get("imageURL");
 
-    //llamar a la funcion del context .. addNew.... parametros
-    //hacer el fetch en el usePosts??
-    // o fetch en el reducer?? creo que
-
-    console.log("entra antes del addNewPost");
-
     await addNewPostToList( title, description, imageURL);
 
     ref.current.reset();

@@ -115,9 +115,10 @@ export const ctrlDeleteComment = async (req, res) => {
     }
 };
 
-//Get a post comments list by postId 
+//Get a post comments list by postId no se usa
 export const ctrlGetPostCommentsList = async (req, res) => {
-    const { PostId } = req.params;
+    const { postId } = req.query.postId
+    console.log(postId);
 
     try {
 

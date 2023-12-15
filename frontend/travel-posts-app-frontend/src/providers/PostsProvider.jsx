@@ -9,6 +9,7 @@ export const PostsProvider = ({ children }) => {
     deletePost,
     addNewPostToList,
     updatePost,
+    getPost,
   } = usePost();
 
   return (
@@ -18,6 +19,7 @@ export const PostsProvider = ({ children }) => {
         deletePost,
         addNewPostToList,
         updatePost,
+        getPost,
       }}
     >
       {children}

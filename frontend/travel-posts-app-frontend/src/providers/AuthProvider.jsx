@@ -18,6 +18,7 @@ function AuthProvider({ children }) {
     setAuth(null);
   };
 
+  //return true if a user is logged, elsewhere return false
   const userIsLogged = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     const token = localStorage.getItem("token");

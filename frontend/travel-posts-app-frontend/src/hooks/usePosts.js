@@ -26,7 +26,18 @@ export const usePost = () => {
   }, []);
 
   // eliminamos un post
-  const deletePost = (postId) => {
+  const deletePost = async (postId) => {
+    try {
+      const req = await fetch(`${API_URL}/post/${postId}`, {
+        method: "DELETE",
+        headers: {
+          "authorization": auth.token,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+
     dispatch({
       type: postTypes.delete_post,
       payload: {
@@ -37,21 +48,20 @@ export const usePost = () => {
 
   // añadimos una nueva tarea a la lista
   const addNewPostToList = async (title, description, imageURL) => {
-
-    const newPost= {
+    const newPost = {
       title,
       description,
       imageURL,
-    }
+    };
 
     try {
-      const req= await fetch(`${API_URL}/post`, {
+      const req = await fetch(`${API_URL}/post`, {
         method: "POST",
         body: JSON.stringify(newPost),
         headers: {
           "Content-Type": "application/json",
           "authorization": auth.token,
-        }
+        },
       });
 
       dispatch({
@@ -62,11 +72,9 @@ export const usePost = () => {
           imageURL,
         },
       });
-      
     } catch (error) {
       console.log(error);
     }
-
   };
 
   // cambiamos el título de una tarea
@@ -82,11 +90,20 @@ export const usePost = () => {
     });
   };
 
+  const getPost = (postId) => {
+    dispatch({
+      type: postTypes.get_post,
+      payload: {
+        postId,
+      },
+    });
+  };
 
   return {
     allPosts,
     deletePost,
     addNewPostToList,
     updatePost,
+    getPost,
   };
 };

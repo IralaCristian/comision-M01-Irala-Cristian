@@ -5,18 +5,18 @@ import { PostsContext } from "../providers/PostsProvider";
 const PostList = () => {
   const { allPosts } = useContext(PostsContext);
 
+  if (!allPosts) {
+    return (
+      <h2> loading......</h2>
+    )
+  }
+
   return (
     <>
       {allPosts.map((post) => {
         return (
           <Post
-            postId={post._id}
-            title={post.title}
-            description={post.description}
-            imageURL={post.imageURL}
-            author={post.author}
-            comments={post.comments}
-            createdAt={post.createdAt}
+            postId={ post._id}
           />
         );
       })}
