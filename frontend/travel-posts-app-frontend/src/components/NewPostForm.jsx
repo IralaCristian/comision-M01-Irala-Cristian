@@ -1,8 +1,13 @@
-import { useId, useRef } from "react";
+import { useContext, useId, useRef,} from "react";
 import { formStyle } from "../styles/formsClasses.js";
+import { PostsContext } from "../providers/PostsProvider.jsx";
+import { useNavigate } from "react-router-dom";
 
 function NewPostForm() {
   const ref = useRef(null);
+  const navigate= useNavigate();
+
+  const { addNewPostToList } = useContext(PostsContext);
 
   const titleRef = useId();
   const descriptionRef = useId();
@@ -19,8 +24,28 @@ function NewPostForm() {
     formLink,
   } = formStyle;
 
-  const handleSubmit = () => {
-    console.log("holis");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+
+    const title = formData.get("title");
+    const description= formData.get("description");
+    const imageURL= formData.get("imageURL");
+
+    //llamar a la funcion del context .. addNew.... parametros
+    //hacer el fetch en el usePosts??
+    // o fetch en el reducer?? creo que
+
+    console.log("entra antes del addNewPost");
+
+    await addNewPostToList( title, description, imageURL);
+
+    ref.current.reset();
+
+    navigate("/");
+
+
   };
 
   return (

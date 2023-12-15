@@ -18,20 +18,7 @@ export const postTypes = {
           imageURL,
         },
       ];
-    }
-  
-    if (action.type === postTypes.complete) {
-      const { taskId } = action.payload;
-  
-      return state.map((task) => {
-        if (task.id !== taskId) return task;
-  
-        return {
-          ...task,
-          completed: !task.completed,
-        };
-      });
-    }
+    };
   
     if (action.type === postTypes.edit_post) {
       const { postId, title, description, imageURL } = action.payload;
