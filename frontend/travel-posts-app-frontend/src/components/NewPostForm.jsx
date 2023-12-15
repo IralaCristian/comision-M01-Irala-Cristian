@@ -2,6 +2,7 @@ import { useContext, useId, useRef,} from "react";
 import { formStyle } from "../styles/formsClasses.js";
 import { PostsContext } from "../providers/PostsProvider.jsx";
 import { useNavigate } from "react-router-dom";
+import Navbar from "./Navbar.jsx";
 
 function NewPostForm() {
   const ref = useRef(null);
@@ -50,6 +51,7 @@ function NewPostForm() {
 
   return (
     <div className={formContainer}>
+      <Navbar/>
       <div className={formRow}>
         <p className="display-6"> Create a new travel post</p>
       </div>

@@ -18,6 +18,17 @@ function AuthProvider({ children }) {
     setAuth(null);
   };
 
+  const userIsLogged = () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const token = localStorage.getItem("token");
+
+    if (user && token) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     const token = localStorage.getItem("token");
@@ -35,7 +46,7 @@ function AuthProvider({ children }) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ auth, login, logout }}>
+    <AuthContext.Provider value={{ auth, login, logout, userIsLogged}}>
       {children}
     </AuthContext.Provider>
   );

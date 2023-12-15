@@ -1,7 +1,28 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../providers/AuthProvider";
 
 function Navbar() {
 
+  const navigate= useNavigate();
+
+  const { userIsLogged, logout} = useContext(AuthContext);
+  let loginHidden= false;
+  let logoutHidden= true;
+  console.log( userIsLogged());
+  if ( userIsLogged() ){
+    console.log("entra porque es true")
+    loginHidden= true;
+    logoutHidden= false;
+  };
+
+  const handleLogout= () => {
+
+    logout();
+
+    navigate("/")
+
+  }
 
   return (
     <>
@@ -31,6 +52,16 @@ function Navbar() {
             <li className="nav-item">
               <Link className="nav-link" to="post/new">
                 Create a Post
+              </Link>
+            </li>
+            <li className="nav-item" hidden= {loginHidden} >
+              <Link className="nav-link" to="/login">
+                Login
+              </Link>
+            </li>
+            <li className="nav-item" hidden= {logoutHidden}>
+              <Link className="nav-link" onClick={handleLogout}>
+                Logout
               </Link>
             </li>
           </ul>
