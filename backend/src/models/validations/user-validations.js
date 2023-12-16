@@ -1,6 +1,8 @@
-import { body } from 'express-validator';
+import { body, param} from 'express-validator';
 import { applyValidations } from '../../middlewares/apply-validations.js';
 import { UserModel } from '../user.model.js';
+import { isValidObjectId } from 'mongoose';
+
 
 //validaciones para el registro de un nuevo usuario
 export const createUserValidations = [
@@ -45,5 +47,13 @@ export const loginUserValidations = [
     body('password')
         .notEmpty().withMessage('El campo { password } no debe estar vacio.')
         .isString().withMessage('El campo { password } debe ser un string.'),
+    applyValidations,
+];
+
+export const getUserValidations = [
+    param('userId')
+        .notEmpty().withMessage('El parametro { userId } no debe estar vacio.')
+        .isString().withMessage('El parametro { userId } debe ser un string.')
+        .custom(isValidObjectId).withMessage('El parametro { userId } debe ser una id valida.'),
     applyValidations,
 ];

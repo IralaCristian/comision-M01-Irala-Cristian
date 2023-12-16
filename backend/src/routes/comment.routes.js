@@ -2,7 +2,7 @@ import { Router } from "express";
 
 //controllers
 import {
-    ctrlCreateComment, ctrlDeleteComment, ctrlGetComment, ctrlUpdateComment
+    ctrlCreateComment, ctrlDeleteComment, ctrlGetComment, ctrlUpdateComment, ctrlGetPostCommentsList
 } from "../controllers/comment.controller.js";
 
 //validations
@@ -10,7 +10,8 @@ import {
     createCommentValidations,
     deleteCommentValidations,
     getCommentValidations,
-    updateCommentValidations
+    updateCommentValidations,
+    listCommentsValidations
 } from "../models/validations/comment-validations.js";
 
 //Auth middlewares
@@ -29,6 +30,8 @@ commentRouter.get('/:commentId', authHeader, validateToken, getCommentValidation
 commentRouter.patch('/:commentId', authHeader, validateToken, updateCommentValidations, ctrlUpdateComment);
 //Delete comment route
 commentRouter.delete('/:commentId', authHeader, validateToken, deleteCommentValidations, ctrlDeleteComment);
+//Obtain a post´s comments list by postId
+commentRouter.get('/postId', listCommentsValidations, ctrlGetPostCommentsList);
 
 
 

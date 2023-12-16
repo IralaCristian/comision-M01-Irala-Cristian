@@ -12,3 +12,7 @@
 ### Estare consultando dudas en estos dias
 
 ### Envió el archivo env.template con las variables de entorno
+
+### Hay errores que no pude solucionar y faltan algunos requerimientos
+
+### hay una rama feature/comment-ultimos-retoques que tiene errores que no puede solucionar

@@ -13,13 +13,13 @@ export const createCommentValidations = [
     applyValidations
 ];
 
-//export const listCommentsValidations = [
-//    param('postId')
-//        .notEmpty().withMessage('El parametro { postId } no debe estar vacio.')
-//        .isString().withMessage('El parametro { postId } debe ser un string.')
-//        .custom(isValidObjectId).withMessage('El parametro { postId } debe ser una id valida.'),
-//    applyValidations,
-//];
+export const listCommentsValidations = [
+    param('postId')
+        .notEmpty().withMessage('El parametro { postId } no debe estar vacio.')
+        .isString().withMessage('El parametro { postId } debe ser un string.')
+        .custom(isValidObjectId).withMessage('El parametro { postId } debe ser una id valida.'),
+    applyValidations,
+];
 
 export const deleteCommentValidations = [
 //    param('postId')

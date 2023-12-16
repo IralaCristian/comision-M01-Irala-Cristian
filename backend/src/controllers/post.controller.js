@@ -48,7 +48,7 @@ export const ctrlListAllPosts = async (req, res) => {
     try {
         const posts= await PostModel.find()
             .populate('author', ['username', 'avatarURL'])
-            .populate('comments', ['description', 'author']);
+            .populate('comments', ['description', 'author'])
 
         res.status(200).json(posts);
     } catch (error) {
