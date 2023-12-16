@@ -5,6 +5,12 @@ import { PostsContext } from "../providers/PostsProvider";
 const PostList = () => {
   const { allPosts } = useContext(PostsContext);
 
+  if (allPosts == [] ){
+    return (
+      <h2> There are no posts yet, login a create one</h2>
+    )
+  }
+
   if (!allPosts) {
     return (
       <h2> loading......</h2>
