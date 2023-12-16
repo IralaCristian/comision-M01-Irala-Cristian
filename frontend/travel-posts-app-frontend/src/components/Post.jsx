@@ -6,13 +6,16 @@ import { MdDelete } from "react-icons/md";
 import { useContext, useEffect, useState } from "react";
 import { PostsContext } from "../providers/PostsProvider.jsx";
 import { API_URL } from "../utils/const.js";
+import { AuthContext } from "../providers/AuthProvider.jsx";
 
 function Post({ postId }) {
   
   const [ post, setPost] = useState(null)
+  const { auth, userIsLogged } = useContext(AuthContext);
   const { formLink, formPicture, formPicutureImg } = formStyle;
   const { deletePost} = useContext(PostsContext);
   const navigate= useNavigate();
+  let deleteHidden= true;
 
   const handleDelete = async (e) =>{
     e.preventDefault();
@@ -40,6 +43,7 @@ function Post({ postId }) {
   if (!post) return (
     <h2> Loading..... </h2>
   );
+
 
   //"row py-3 border border-info"
   return (
@@ -78,7 +82,7 @@ function Post({ postId }) {
           <div className="col-3 sm-12">
             <p> {post.author.username}</p>
           </div>
-          <div className="col-6 sm-12">
+          <div className="col-6 sm-12" hidden={deleteHidden}>
               <MdDelete onClick={handleDelete}/>
           </div>
         </div>
