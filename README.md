@@ -16,3 +16,5 @@
 ### Hay errores que no pude solucionar y faltan algunos requerimientos
 
 ### hay una rama feature/comment-ultimos-retoques que tiene errores que no puede solucionar
+
+### cuando creo un nuevo posteo este falla en cargarse cuando soy redireccionado a homepage. pero si salgo del servidor frontend y vuelvo a entrar ahi si aparece..
