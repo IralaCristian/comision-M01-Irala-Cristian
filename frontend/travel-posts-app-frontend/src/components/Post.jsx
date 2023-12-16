@@ -6,12 +6,16 @@ import { MdDelete } from "react-icons/md";
 import { useContext, useEffect, useState } from "react";
 import { PostsContext } from "../providers/PostsProvider.jsx";
 import { API_URL } from "../utils/const.js";
+import { AuthContext } from "../providers/AuthProvider.jsx";
 
-function Post({ postId }) {
+function Post( {postId} ) {
   
-  const [ post, setPost] = useState(null)
+  const [ post, setPost] = useState(null);
+  const { auth, userIsLogged } = useContext(AuthContext);
   const { formLink, formPicture, formPicutureImg } = formStyle;
   const { deletePost} = useContext(PostsContext);
+
+  let deleteHidden= true;
   const navigate= useNavigate();
 
   const handleDelete = async (e) =>{
@@ -25,6 +29,7 @@ function Post({ postId }) {
   };
 
   useEffect( () => {
+    console.log(postId);
     fetch(`${API_URL}/post/${postId}`)
       .then((res) => {
         if (res.status !== 200) return alert("Error getting the post");
@@ -41,6 +46,10 @@ function Post({ postId }) {
     <h2> Loading..... </h2>
   );
 
+  if (userIsLogged() && (auth.user._id == post.author._id)) {
+    deleteHidden = false;
+  }
+
   //"row py-3 border border-info"
   return (
     <div className="row py-3 border border-info">
@@ -54,7 +63,7 @@ function Post({ postId }) {
         />
       </div>
       <div className="col md-9 sm-12">
-        <Link className={formLink} to={`/post/${post._id}`}>
+        <Link className={formLink} to={`/post/${postId}`}>
           {post.title}
         </Link>
         <div className="row">
@@ -78,7 +87,7 @@ function Post({ postId }) {
           <div className="col-3 sm-12">
             <p> {post.author.username}</p>
           </div>
-          <div className="col-6 sm-12">
+          <div className="col-6 sm-12" hidden={deleteHidden}>
               <MdDelete onClick={handleDelete}/>
           </div>
         </div>

@@ -1,12 +1,15 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 
 function Navbar() {
   const navigate = useNavigate();
 
   // change between login or logout link depending from the user's session
-  const { userIsLogged, logout } = useContext(AuthContext);
+  const { auth, userIsLogged, logout } = useContext(AuthContext);
+
+  //const [ user , setUser] = useState({});
+
   let loginHidden = false;
   let logoutHidden = true;
   if (userIsLogged()) {
@@ -19,6 +22,12 @@ function Navbar() {
 
     navigate("/");
   };
+
+  //useEffect( () => {
+  //  setUser(auth.user)
+  //}, [auth.user])
+
+
 
   return (
     <>

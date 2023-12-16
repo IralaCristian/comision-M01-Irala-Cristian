@@ -9,7 +9,10 @@ import { AuthContext } from '../providers/AuthProvider';
 import { formStyle } from '../styles/formsClasses.js';
 
 function PostPage() {
-  const {postId} = useParams();
+  const postId = useParams();
+  
+  console.log("post page");
+  console.log(postId)
   //const { getPost } = useContext(PostsContext);
 
   const [post, setPost] = useState(null);
@@ -42,16 +45,10 @@ function PostPage() {
     <div className='container' name="main_container">
       <Navbar/>
         <Post
-            postId={post._id}
-            title={post.title}
-            description={post.description}
-            imageURL={post.imageURL}
-            author={post.author}
-            comments={post.comments}
-            createdAt={post.createdAt}
+            postId= {post._id}
           /> 
           <div className='row' hidden={createHidden}>
-            <Link className="display-6" to={`/comment/new/${postId}`} >Comentar </Link>
+            <Link className="display-6" to={`/comment/new/${post._id}`} >Comentar </Link>
           </div>
         <CommentList comments= {post.comments} />  
     </div>

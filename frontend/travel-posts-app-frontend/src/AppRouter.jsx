@@ -8,6 +8,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import EditPostForm from "./components/EditPostForm";
 import PostPage from "./pages/PostPage";
 import NewCommentForm from "./components/NewCommentForm";
+import EditCommentForm from "./components/EditCommentForm";
 
 function AppRouter() {
   return (
@@ -25,6 +26,7 @@ function AppRouter() {
           <Route path="post/new" element={<NewPostForm />} />
           <Route path="post/edit/:postId" element={<EditPostForm />} />
           <Route path="comment/new/:postId" element={<NewCommentForm />} />
+          <Route path="comment/edit/:postId" element={<EditCommentForm />} />
         </Route>
 
       <Route path="*" element={<NotFoundPage />} />
