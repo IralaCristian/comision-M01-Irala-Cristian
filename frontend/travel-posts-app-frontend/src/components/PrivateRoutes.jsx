@@ -8,6 +8,7 @@ function PrivateRoutes() {
 
   useEffect(() => {
     if (auth === null) {
+      alert("You must login to continue");
       navigate("/");
     }
   }, [auth, navigate]);

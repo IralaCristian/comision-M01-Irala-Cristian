@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { formStyle } from '../styles/formsClasses.js';
 import { API_URL } from '../utils/const.js';
+import { AuthContext } from '../providers/AuthProvider.jsx';
 
 function Comment( { commentId, description, commentAuthor, createdAt}) {
     const { formPicture, formPicutureImg} = formStyle

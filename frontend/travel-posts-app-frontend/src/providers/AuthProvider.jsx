@@ -15,6 +15,7 @@ function AuthProvider({ children }) {
   const logout = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
+    alert("Your session has closed");
     setAuth(null);
   };
 
