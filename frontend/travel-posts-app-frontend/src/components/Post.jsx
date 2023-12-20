@@ -8,10 +8,21 @@ import { PostsContext } from "../providers/PostsProvider.jsx";
 import { API_URL } from "../utils/const.js";
 import { AuthContext } from "../providers/AuthProvider.jsx";
 
-function Post({ postId }) {
-  
-  const [ post, setPost] = useState(null)
+function Post( {posteo} ) {
+
+
+    const id = posteo._id;
+    console.log( "id sacado de post._id: " + id);
+    console.log(posteo)
+
+
+    const { _id, title, description, imageURL, author, comments, createdAt } = posteo
+
+  console.log("postId que viene desde el postList key: " + _id);
+  //const { getPost } = useContext(PostsContext);
+  //const post= (getPost(postId));
   const { auth, userIsLogged } = useContext(AuthContext);
+
   const { formLink, formPicture, formPicutureImg } = formStyle;
   const { deletePost} = useContext(PostsContext);
   const navigate= useNavigate();
@@ -20,27 +31,21 @@ function Post({ postId }) {
   const handleDelete = async (e) =>{
     e.preventDefault();
 
-      await deletePost(post._id);
+      await deletePost(e.target.value);
 
       alert("el posteo ha sido eliminado");
 
       navigate("/");
   };
 
-  useEffect( () => {
-    fetch(`${API_URL}/post/${postId}`)
-      .then((res) => {
-        if (res.status !== 200) return alert("Error getting the post");
-
-        return res.json();
-      })
-      .then((data) => {
-        setPost(data);
-      });
-  }, [postId]);
+ // useEffect( (postId ) => {
+ //   console.log("postId en el useEffect: ");
+ //   console.log(postId);
+ //   setPost (getPost(postId));
+ // }, [postId]);
 
 
-  if (!post) return (
+  if (!posteo) return (
     <h2> Loading..... </h2>
   );
 
@@ -50,7 +55,7 @@ function Post({ postId }) {
     <div className="row py-3 border border-info">
       <div className="col md-3 sm-12">
         <img
-          src={post.imageURL}
+          src={imageURL}
           className="rounded"
           height="200"
           width="200"
@@ -58,20 +63,20 @@ function Post({ postId }) {
         />
       </div>
       <div className="col md-9 sm-12">
-        <Link className={formLink} to={`/post/${post._id}`}>
-          {post.title}
+        <Link className={formLink} to={`/post/${_id}`}>
+          {title}
         </Link>
         <div className="row">
-          <p className="display-7">{post.description}</p>
+          <p className="display-7">{description}</p>
           <p className="display-7">
-            <FaComment/> : {`${post.comments.length}`}</p>
-          <p className="display-8"> {post.createdAt} </p>
+            <FaComment/> : {`${comments.length}`}</p>
+          <p className="display-8"> {createdAt} </p>
         </div>
         <div className="row">
           <div className="col-3 sm-12">
             <picture className={formPicture}>
               <img
-                src={post.author.avatarURL}
+                src={author.avatarURL}
                 className={formPicutureImg}
                 height="80"
                 width="80"
@@ -80,10 +85,10 @@ function Post({ postId }) {
             </picture>
           </div>
           <div className="col-3 sm-12">
-            <p> {post.author.username}</p>
+            <p> {author.username}</p>
           </div>
           <div className="col-6 sm-12" hidden={deleteHidden}>
-              <MdDelete onClick={handleDelete}/>
+              <MdDelete value={_id} onClick={handleDelete}/>
           </div>
         </div>
       </div>

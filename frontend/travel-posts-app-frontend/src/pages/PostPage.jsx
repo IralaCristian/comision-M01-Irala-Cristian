@@ -9,6 +9,7 @@ import { AuthContext } from '../providers/AuthProvider';
 
 function PostPage() {
   const {postId} = useParams();
+  console.log(" postId que viene del useparams cuando llamo a la page PostPage:" + postId);
   const { userIsLogged} = useContext(AuthContext);
   //const { getPost } = useContext(PostsContext);
 
@@ -37,13 +38,7 @@ function PostPage() {
     <div className='container' name="main_container">
       <Navbar/>
         <Post
-            postId={post._id}
-            title={post.title}
-            description={post.description}
-            imageURL={post.imageURL}
-            author={post.author}
-            comments={post.comments}
-            createdAt={post.createdAt}
+            posteo= {post}
           />
           <div className='row' hidden={createHidden}>
             <Link className="display-6" to={`/comment/new/${post._id}`} >Comentar </Link>

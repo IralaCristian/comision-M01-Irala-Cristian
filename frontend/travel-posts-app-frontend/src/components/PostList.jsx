@@ -17,12 +17,19 @@ const PostList = () => {
     )
   }
 
+  allPosts.map((postP) => {
+    console.log(" cada posteo que tiene allpost antes de ir a los post particulares")
+    console.log(  postP  );
+    console.log( postP._id);
+  })
+
   return (
     <>
       {allPosts.map((post) => {
         return (
           <Post
-            postId={ post._id}
+          key={post._id}
+          posteo= {post}
           />
         );
       })}

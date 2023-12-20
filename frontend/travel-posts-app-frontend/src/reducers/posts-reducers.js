@@ -50,8 +50,10 @@ export const postTypes = {
       }
 
     if (action.type === postTypes.get_post){
-      const {postId} = action.payload
-      return state.findOne( (element) => element._id == postId );
+      const {postId} = action.payload;
+      console.log("postId en el reducer: ");
+      console.log(postId);
+      return state.find( (element) => element._id == postId );
     }
   
     return state;
